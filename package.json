@@ -1,0 +1,32 @@
+{
+  "name": "s-means.js",
+  "version": "0.0.0",
+  "description": "S-Means clustering",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --compilers coffee:coffee-script test",
+    "build": "coffee -c -o ./build brewmath.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/c0bra/s-means.js.git"
+  },
+  "keywords": [
+    "clustering",
+    "s-means",
+    "k-means",
+    "statistics",
+    "math"
+  ],
+  "author": "Brian Hann",
+  "license": "BSD",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "",
+    "chai": "",
+    "coffee-script": ""
+  }
+}
