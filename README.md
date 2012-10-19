@@ -1,5 +1,7 @@
 ## smeans.js
 
+[![Build Status](https://secure.travis-ci.org/c0bra/smeans.js?branch=master)](http://travis-ci.org/c0bra/smeans.js)
+
 S-Means clustering in javascript
 
 ### What?
