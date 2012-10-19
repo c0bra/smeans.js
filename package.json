@@ -1,6 +1,6 @@
 {
   "name": "smeans",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "S-Means clustering",
   "main": "lib/smeans.js",
   "directories": {
