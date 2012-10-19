@@ -1,4 +1,3 @@
-eyes = require('eyes')
 smeans = undefined
 VERSION = "0.0.1"
 
