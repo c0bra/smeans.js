@@ -18,6 +18,8 @@
     "clustering",
     "s-means",
     "k-means",
+    "smeans",
+    "keans",
     "statistics",
     "math"
   ],
