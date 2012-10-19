@@ -1,3 +1,4 @@
+eyes = require('eyes')
 smeans = undefined
 VERSION = "0.0.1"
 
@@ -52,7 +53,7 @@ smeans.cluster = (elements) ->
     cluster_map[i] = {
       'i': i,
       'centroid': centroid,
-      'elements': []
+      'elements': {}
     }
 
   while changing == 1
@@ -78,7 +79,7 @@ smeans.cluster = (elements) ->
       
       # If the distance is below the threshold, add it to this cluster
       if closest_dist < threshold
-        closest_cluster.elements.push e
+        closest_cluster.elements[e] = e
       
       # Otherwise create a new cluster with this data point as the centroid,
       #   also add this data point to the new cluster
@@ -91,17 +92,24 @@ smeans.cluster = (elements) ->
         cluster_map[ max_ci ] = {
           'i':        max_ci,
           'centroid': e,
-          'elements': []
+          'elements': {}
         }
 
-        cluster_map[max_ci].elements.push e
+        cluster_map[max_ci].elements[e] = e
+
+        # *** This seems to make it never return...
+        # new_cluster = 1
 
     cluster_changed = 0
     
     # For each cluster
     for ci, cluster of cluster_map
+      # Get the number of elements in the cluster
+      ecount = 0
+      ecount++ for i, v of cluster.elements
+
       # Delete clusters that have no elements
-      if cluster.elements.length == 0
+      if ecount == 0
         # console.log "Deleting!"
         delete cluster_map[ ci ]
         continue
@@ -109,7 +117,7 @@ smeans.cluster = (elements) ->
       # Calculate the average Euclidean distance to each of its elements (since we're one dimensional here it's just the mean)
       tot   = 0
       count = 0
-      for e in cluster.elements
+      for i, e of cluster.elements
         tot += e
         count++
         # console.log "E: #{e}, count: #{count}"
@@ -126,10 +134,11 @@ smeans.cluster = (elements) ->
         cluster_changed = 1
     
     # If no cluster was changed and no new cluster was created, we're done clustering
-    if ! cluster_changed
+    if ! cluster_changed && ! new_cluster
       changing = 0
 
   return cluster_map
+
 
 module.exports = smeans  if hasModule
 this["smeans"] = smeans  if typeof ender is "undefined"
