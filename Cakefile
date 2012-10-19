@@ -8,7 +8,7 @@ findExecutable = (executable, callback) ->
 build = (callback) ->
   exec 'mkdir lib', (err, stdout, stderr) ->
     # throw new Error(err) if err
-    exec "coffee --compile --output lib/smeans.js smeans.coffee", (err, stdout, stderr) ->
+    exec "coffee --compile --output lib smeans.coffee", (err, stdout, stderr) ->
       throw new Error(err) if err
       callback() if callback
 
