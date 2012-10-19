@@ -1,14 +1,14 @@
 {
-  "name": "s-means.js",
+  "name": "smeans",
   "version": "0.0.0",
   "description": "S-Means clustering",
-  "main": "index.js",
+  "main": "lib/smeans.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "mocha --compilers coffee:coffee-script test",
-    "build": "coffee -c -o ./build brewmath.coffee"
+    "build": "coffee -c -o ./build/ smeans.coffee"
   },
   "repository": {
     "type": "git",
