@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "mocha --compilers coffee:coffee-script test",
-    "build": "coffee -c -o ./build/ smeans.coffee"
+    "prepublish": "cake build"
   },
   "repository": {
     "type": "git",
