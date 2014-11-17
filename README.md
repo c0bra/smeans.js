@@ -8,7 +8,7 @@ S-Means clustering in javascript
 
 S-Means is a clustering algorithm similar to [K-Means](http://en.wikipedia.org/wiki/K-means), but it does not need a initial value for K (number of clusters).
 
-There is a white-paper on S-Means [here](http://www.ecmlpkdd2007.org/CD/workshops/IWKDUDS/papers/p3.pdf).
+There is a white-paper on S-Means [here](http://hansheng.synthasite.com/resources/Smeans_FinalVersion.pdf).
 
 ### Why?
 
