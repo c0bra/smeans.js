@@ -297,8 +297,7 @@
           var ce = cluster_elms[i];
           cluster_vals.push(cluster.elements[ce]);
         }
-
-        debugger;
+        
         var new_centroid = Smeans.centroid(cluster_vals);
         
         // If this newly calculated centroid is different than the current one, assign it
