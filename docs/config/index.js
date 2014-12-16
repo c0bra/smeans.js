@@ -14,6 +14,7 @@ module.exports = new Package('smeans', [
 .factory(require('./services/deployments/default'))
 
 .processor(require('./processors/index-page'))
+.processor(require('./processors/pages-data'))
 
 .config(function (dgeni, log, readFilesProcessor, writeFilesProcessor) {
   dgeni.stopOnValidationError = true;
@@ -23,20 +24,25 @@ module.exports = new Package('smeans', [
 
   readFilesProcessor.basePath = path.resolve(__dirname,'../..');
   readFilesProcessor.sourceFiles = [
-    { include: 'lib/**/*.js', basePath: 'src' },
+    { include: 'src/**/*.js', basePath: 'src' },
     { include: 'docs/content/**/*.ngdoc', basePath: 'docs/content' }
   ];
 
   writeFilesProcessor.outputFolder = 'build';
 })
 
-.config(function (templateFinder) {
+.config(function (templateFinder, templateEngine) {
   templateFinder.templateFolders.unshift(path.resolve(__dirname, 'templates'));
 
   templateFinder.templatePatterns = [
     '${ doc.docType }.template.html',
     'common.template.html'
   ];
+
+  templateEngine.config.tags = {
+    variableStart: '{$',
+    variableEnd: '$}'
+  };
 })
 
 .config(function (computePathsProcessor, computeIdsProcessor) {

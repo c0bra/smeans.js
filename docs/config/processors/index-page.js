@@ -6,7 +6,7 @@ var path = require('canonical-path');
 module.exports = function generateIndexPagesProcessor() {
   return {
     name: 'index-page',
-    deployments: [],
+    // deployments: [],
     $validate: {
       deployments: { presence: true }
     },
@@ -36,6 +36,12 @@ module.exports = function generateIndexPagesProcessor() {
 
         docs.push(indexDoc);
       });
+
+      // docs.push({
+      //   docType: 'indexPage',
+      //   areas: areas,
+      //   id: 'index'
+      // });
     }
   };
 };

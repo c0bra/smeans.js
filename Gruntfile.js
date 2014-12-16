@@ -12,6 +12,14 @@ module.exports = function(grunt) {
     clean: ['dist', 'build'],
 
     copy: {
+      bower: {
+        files: [{
+          expand: true,
+          cwd: 'bower_components',
+          src: ['**/*.js', '**/*.css', '**/*.js.map'],
+          dest: 'build/components'
+        }]
+      },
       docs: {
         files: [{
             expand: true,
@@ -35,7 +43,7 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       build: {
-        src: ['lib/<%= pkg.name %>.js'],
+        src: ['src/<%= pkg.name %>.js'],
         dest: 'build/js/<%= pkg.name %>.js'
       },
     },
@@ -67,11 +75,11 @@ module.exports = function(grunt) {
       gruntfile: {
         src: 'Gruntfile.js'
       },
-      lib: {
+      source: {
         options: {
-          jshintrc: 'lib/.jshintrc'
+          jshintrc: 'src/.jshintrc'
         },
-        src: ['lib/**/*.js']
+        src: ['src/**/*.js']
       },
       test: {
         options: {
@@ -82,31 +90,36 @@ module.exports = function(grunt) {
     },
 
     jscs: {
-      src: ['lib/**/*.js', 'test/**/*.spec.js'],
+      src: ['src/**/*.js', 'test/**/*.spec.js'],
       options: {
         config: '.jscs.json'
       }
     },
 
     watch: {
-      options: {
-        livereload: true
-      },
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
         tasks: ['jshint:gruntfile']
       },
-      lib: {
-        files: '<%= jshint.lib.src %>',
-        tasks: ['jshint:lib', 'jscs', 'test']
+      source: {
+        files: '<%= jshint.source.src %>',
+        tasks: ['jshint:source', 'jscs', 'test']
       },
       test: {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'jscs', 'test']
       },
       docs: {
-        files: ['<%= jshint.lib.src %>', 'docs/content/**'],
+        files: ['<%= jshint.source.src %>', 'docs/**/*.js', 'docs/content/**', 'docs/config/templates/**/*.template.html'],
         tasks: ['docs']
+      },
+      copyDocs: {
+        files: ['docs/assets/**'],
+        tasks: ['copy:docs']
+      },
+      livereload: {
+        options: { livereload: true },
+        files: ['build/**/*'],
       }
     },
 
@@ -114,7 +127,8 @@ module.exports = function(grunt) {
       docs: {
         options: {
           base: 'build',
-          port: 8123
+          port: 8123,
+          livereload: true
         }
       }
     }
@@ -137,7 +151,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest']);
   grunt.registerTask('build', ['concat', 'uglify', 'docs']);
 
-  grunt.registerTask('dev', ['clean', 'build', 'connect', 'watch']);
+  grunt.registerTask('dev', ['clean', 'copy', 'build', 'connect', 'watch']);
 
   grunt.registerTask('docs', 'Generate docs via dgeni.', function() {
     var done = this.async();
