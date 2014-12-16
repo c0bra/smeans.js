@@ -1,34 +1,46 @@
 {
-  "name": "smeans",
-  "version": "0.0.3",
-  "description": "S-Means clustering",
-  "main": "lib/smeans.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "mocha --compilers coffee:coffee-script test",
-    "prepublish": "cake build"
+  "name": "smeans.js",
+  "description": "S-Means clustering in JavaScript",
+  "version": "0.0.0",
+  "homepage": "https://github.com/c0bra/smeans.js",
+  "author": {
+    "name": "Brian Hann",
+    "email": "brian.hann@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/c0bra/s-means.js.git"
+    "url": "https://github.com/c0bra/smeans.js.git"
   },
-  "keywords": [
-    "clustering",
-    "s-means",
-    "k-means",
-    "smeans",
-    "kmeans",
-    "statistics",
-    "math"
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/c0bra/smeans.js/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/c0bra/smeans.js/blob/master/LICENSE-MIT"
+    }
   ],
-  "author": "Brian Hann",
-  "license": "BSD",
-  "dependencies": {},
+  "main": "lib/s-means.js",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
   "devDependencies": {
-    "mocha": "",
-    "chai": "",
-    "coffee-script": ""
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "mocha": "^2.0.1",
+    "grunt-mocha-test": "^0.12.4",
+    "chai": "^1.10.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-jscs": "^1.0.0",
+    "lodash": "^2.4.1",
+    "chai-things": "^0.2.0"
   }
 }

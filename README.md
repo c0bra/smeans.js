@@ -1,67 +1,57 @@
-## smeans.js
+# s-means.js
 
-[![Build Status](https://secure.travis-ci.org/c0bra/smeans.js?branch=master)](http://travis-ci.org/c0bra/smeans.js)
+S-Means clustering in JavaScript
 
-S-Means clustering in javascript
+## Getting Started
+### On the server
+Install the module with: `npm install s-means.js`
 
-### What?
+```javascript
+var s_means_js = require('s-means.js');
+s_means_js.awesome(); // "awesome"
+```
 
-S-Means is a clustering algorithm similar to [K-Means](http://en.wikipedia.org/wiki/K-means), but it does not need a initial value for K (number of clusters).
+### In the browser
+Download the [production version][min] or the [development version][max].
 
-There is a white-paper on S-Means [here](http://hansheng.synthasite.com/resources/Smeans_FinalVersion.pdf).
+[min]: https://raw.github.com/c0bra/smeans.js/master/dist/s-means.js.min.js
+[max]: https://raw.github.com/c0bra/smeans.js/master/dist/s-means.js.js
 
-### Why?
+In your web page:
 
-Clustering data. when you don't know the initial number of clusters to use, is pretty hard. Deciding the value for K is the subject of a whole slew of papers. S-Means makes it easier. Let the algorithm decide.
+```html
+<script src="dist/s-means.js.min.js"></script>
+<script>
+awesome(); // "awesome"
+</script>
+```
 
-<!-- ### How does it work?
+In your code, you can attach s-means.js's methods to any object.
 
-The basics of S-Means is that it starts with one or more initial clusters, and while testing each data point against each cluster it:
-1. moves the cluster centroid around to better fit its elements,
-2. creates new one clusters, and
-3. removes clusters with no elements,
+```html
+<script>
+var exports = Bocoup.utils;
+</script>
+<script src="dist/s-means.js.min.js"></script>
+<script>
+Bocoup.utils.awesome(); // "awesome"
+</script>
+```
 
-until the clusters stop changing. -->
+## Documentation
+_(Coming soon)_
 
-<!-- The basics of my implementation are:
+## Examples
+_(Coming soon)_
 
-1. Get the standard deviation of the distance between sequential data points. Use this as the similarity threshold
-1. One of the supplied data points is randomly selected to the first centroid.
-1. Test the distance of each data point against the centroid. If the distance is above the threshold, make that data point a NEW centroid
-Then
-1. Test each data point against  -->
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
-### OK, how do I use it?
+_Also, please don't edit files in the "dist" subdirectory as they are generated via Grunt. You'll find source code in the "lib" subdirectory!_
 
-#### JavaScript
+## Release History
+_(Nothing yet)_
 
-		var smeans = require('smeans');
-		var data = [1, 2, 3, 101, 102, 103];
-		var clusters = smeans.cluster(data);
-
-		// clusters =
-		{
-			1: {
-		        elements: [
-		            1,
-		            2,
-		            3,
-		        ],
-		        i: 1,
-		        centroid: 2
-		    },
-		    2: {
-		        elements: [
-		            101,
-		            102,
-		            103,
-		        ],
-		        i: 2,
-		        centroid: 101
-		    }
-		}
-
-#### CoffeeScript
-	smeans = require('smeans')
-	data = [1, 2, 3, 101, 102, 103]
-	clusters = smeans.cluster data
+## License
+Copyright (c) 2014 Brian Hann  
+Licensed under the MIT license.
