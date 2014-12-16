@@ -1,0 +1,35 @@
+{
+  "name": "smeans.js",
+  "main": "dist/smeans.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/c0bra/smeans.js",
+  "authors": [
+    "Brian Hann <brian.hann@gmail.com>"
+  ],
+  "description": "S-Means clustering in JavaScript",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "clustering",
+    "statistics",
+    "s-means",
+    "smeans",
+    "k-means",
+    "kmeans"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "google-code-prettify": "~1.0.3",
+    "bootstrap": "~3.3.1",
+    "angular-bootstrap": "~0.12.0",
+    "angular": "~1.3.7"
+  }
+}

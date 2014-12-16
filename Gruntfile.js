@@ -9,7 +9,18 @@ module.exports = function(grunt) {
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
 
-    clean: ['build'],
+    clean: ['dist', 'build'],
+
+    copy: {
+      docs: {
+        files: [{
+            expand: true,
+            cwd: 'docs/assets/',
+            src: '**',
+            dest: 'build'
+        }]
+      }
+    },
 
     banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
       '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
@@ -23,9 +34,9 @@ module.exports = function(grunt) {
         banner: '<%= banner %>',
         stripBanners: true
       },
-      dist: {
+      build: {
         src: ['lib/<%= pkg.name %>.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+        dest: 'build/js/<%= pkg.name %>.js'
       },
     },
 
@@ -33,9 +44,9 @@ module.exports = function(grunt) {
       options: {
         banner: '<%= banner %>'
       },
-      dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
+      build: {
+        src: '<%= concat.build.dest %>',
+        dest: 'build/js/<%= pkg.name %>.min.js'
       }
     },
 
@@ -78,6 +89,9 @@ module.exports = function(grunt) {
     },
 
     watch: {
+      options: {
+        livereload: true
+      },
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
         tasks: ['jshint:gruntfile']
@@ -89,27 +103,46 @@ module.exports = function(grunt) {
       test: {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'jscs', 'test']
+      },
+      docs: {
+        files: ['<%= jshint.lib.src %>', 'docs/content/**'],
+        tasks: ['docs']
+      }
+    },
+
+    connect: {
+      docs: {
+        options: {
+          base: 'build',
+          port: 8123
+        }
       }
     }
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-jscs');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'jscs', 'test', 'concat', 'uglify']);
 
-  grunt.registerTask('test', ['mochaTest']);
+  grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest']);
+  grunt.registerTask('build', ['concat', 'uglify', 'docs']);
 
-  grunt.registerTask('dgeni', 'Generate docs via dgeni.', function() {
+  grunt.registerTask('dev', ['clean', 'build', 'connect', 'watch']);
+
+  grunt.registerTask('docs', 'Generate docs via dgeni.', function() {
     var done = this.async();
-    var dgeni = new Dgeni([require('./docs/docs')]);
-      dgeni.generate().then(done);
-    });
+    var dgeni = new Dgeni([require('./docs/config')]);
+    
+    dgeni.generate().then(done);
+  });
 };
