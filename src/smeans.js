@@ -18,10 +18,26 @@
   Smeans.closest = closest;
 
   /**
+  * @ngdoc function
   * @name cluster
-  * @description This function clusters stuff
+  * @param {Array} elements - An array of N-element arrays where each element is a number.
+  * @param {object} options - A set of options to pass to the clustering function
+  * @description
+
+      Cluster takes an array of number-arrays like so:
+      <pre>
+        smeans.cluster([
+          [0, 0],
+          [1, 1],
+          [20, 30],
+          [40, 2]
+        ]);
+      </pre>
+      ... and groups them into "clusters" according to Euclidean-distance similarity.
   */
   function cluster(elements, opts) {
+    /*jshint -W004 */
+
     if (!Array.isArray(elements)) {
       throw new Error("Elements argument is not an array");
     }
@@ -192,7 +208,13 @@
     return cluster_map;
   }
 
-  // Calculate distance between two points in N-space
+  /**
+  * @ngdoc function
+  * @name distance
+  * @param {object} point1 - An N-element array of numbers
+  * @param {object} point2 - An N-element array of numbers
+  * @description Calculate distance between two points in N-space
+  */
   function distance(d1, d2) {
     // Build an array of distance squares
     var tot = 0;
@@ -222,6 +244,8 @@
   }
 
   function centroid(elements) {
+    /*jshint -W004 */
+
     var l = elements[0].length;
     var el = elements.length;
 

@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var path = require('canonical-path');
 
-module.exports = function generateIndexPagesProcessor() {
+module.exports = function generateIndexPagesProcessor(log) {
   return {
     name: 'index-page',
     // deployments: [],

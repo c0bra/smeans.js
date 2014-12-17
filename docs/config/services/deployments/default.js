@@ -14,7 +14,9 @@ module.exports = function defaultDeployment() {
       // 'components/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'components/google-code-prettify/src/prettify.js',
       'components/google-code-prettify/src/lang-css.js',
+      'js/nav-data.js',
       'js/pages-data.js',
+      'js/docs-bootstrap.js',
       'js/docs.js'
     ],
     stylesheets: [

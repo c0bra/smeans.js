@@ -5,7 +5,7 @@ var chai = require('chai');
 chai.should();
 chai.use(require('chai-things'));
 
-var smeans = require('../lib/smeans.js');
+var smeans = require('../src/smeans.js');
 
 describe('smeans', function () {
   it('works', function () {
