@@ -38,7 +38,7 @@ angular.module('app', ['docs.utils'])
           .attr("cy", function(d) { return d[1]; });
 
         // Cluster points and add centroids and lines
-        var clusters = Smeans.cluster(points);
+        var clusters = $scope.clusters = Smeans.cluster(points);
 
         svg.selectAll('.centroid').remove();
         svg.selectAll('.line').remove();
