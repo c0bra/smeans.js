@@ -56,8 +56,3 @@ angular.module('docsApp', ['ngRoute', 'navData', 'pagesData', 'docs.bootstrap'])
     return filtered;
   };
 });
-
-
-// .controller('PageController', function ($scope, $route) {
-//   $scope.$route = $route;
-// })

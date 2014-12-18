@@ -8,15 +8,59 @@ What up yo
 
 <example name="tutorial1" module="app">
   <file name="index.html">
-    <div>Scooby doo</div>
+    <strong>Click anywhere in the canvas below to add a point. It will then be clustered by smeans.js.</strong>
     <br>
-    {{ vals | json }}
+    <br>
+    <button type="button" ng-click="clear()">Clear</button>
+    <br>
+    <app-canvas></app-canvas>
   </file>
   <file name="app.js">
-    angular.module('app', [])
+    angular.module('app', ['docs.utils'])
     
     .run(function ($rootScope) {
       $rootScope.vals = Smeans.cluster([ [1, 0], [2, 2], [1000, 10001] ]);
     })
+
+    .directive('appCanvas', function ($log, $interval, $compile) {
+      var r = 4;
+
+      return {
+        restrict: 'EA',
+        priority: '200',
+        scope: false,
+        require: 'appCanvas',
+        link: function ($scope, $elm, $attr, ctrl) {
+          var svg = ctrl.svg();
+          var points = $scope.points = [];
+
+          svg.selectAll('circle')
+            .data(points);
+
+          svg.on('click', function () {
+            points.push(d3.mouse(this));
+
+            redraw();
+          });
+
+          function redraw() {
+            var circle = svg.selectAll("circle")
+              .data(points, function(d) { return d; });
+
+            circle.enter()
+              .append('circle')
+              .attr('r', r)
+              .attr("cx", function(d) { return d[0]; })
+              .attr("cy", function(d) { return d[1]; });
+          }
+
+          $scope.redraw = redraw;
+          $scope.clear = function() {
+            $scope.points.length = 0;
+            svg.selectAll("circle").remove();
+          };
+        }
+      };
+    });
   </file>
 </example>

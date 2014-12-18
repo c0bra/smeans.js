@@ -1,0 +1,23 @@
+body {
+  font-family: Verdana, Arial, sans;
+  font-size: 12px;
+}
+
+app-canvas {
+  border: 1px solid black;
+  height: 300px;
+  width: 600px;
+  display: inline-block;
+}
+
+circle {
+  fill: steelblue;
+}
+
+.centroid {
+  fill: red;
+}
+
+.line {
+  opacity: 0.3;
+}
