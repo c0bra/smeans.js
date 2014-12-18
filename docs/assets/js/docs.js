@@ -3,20 +3,18 @@ angular.module('docsApp', ['ngRoute', 'navData', 'pagesData', 'docs.bootstrap'])
 
 .config(function ($routeProvider) {
   $routeProvider
-    .when('/', {
-      templateUrl: '/partials/index.html'
-    })
     .when('/doc/:path*', {
       controller: 'DocsController',
       templateUrl: function(urlattr) {
-        return '/partials/' + urlattr.path + '.html';
+        return 'partials/' + urlattr.path + '.html';
       },
       resolve: {
         $route: function ($route) {
           return $route;
         }
       }
-    });
+    })
+    .otherwise('/doc/Tutorial');
 })
 
 .controller('DocsController', function ($log, $scope, DOCS_PAGES, NAV_DATA, $route) {

@@ -56,6 +56,10 @@ module.exports = function(grunt) {
       build: {
         src: 'build/js/<%= pkg.name %>.js',
         dest: 'build/js/<%= pkg.name %>.min.js'
+      },
+      dist: {
+        src: 'dist/js/<%= pkg.name %>.js',
+        dest: 'dist/js/<%= pkg.name %>.min.js'
       }
     },
 
@@ -132,6 +136,36 @@ module.exports = function(grunt) {
           livereload: true
         }
       }
+    },
+
+    bump: {
+      options: {
+        files: ['package.json', 'bower.json'],
+        commitFiles: ['package.json', 'bower.json'],
+        push: false
+      }
+    },
+
+    'npm-publish': {
+      options: {
+        // list of tasks that are required before publishing
+        requires: ['build'],
+        // if the workspace is dirty, abort publishing (to avoid publishing local changes)
+        abortIfDirty: true
+      }
+    },
+
+    'npm-contributors': {
+      options: {
+        commitMessage: 'chore: update contributors'
+      }
+    },
+
+    'gh-pages': {
+      options: {
+        base: 'build'
+      },
+      src: ['**']
     }
   });
 
@@ -145,15 +179,18 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks('grunt-npm');
+  grunt.loadNpmTasks('grunt-gh-pages');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'jscs', 'test', 'build']);
 
   grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest']);
   // grunt.registerTask('build', ['concat', 'uglify', 'docs']);
-  grunt.registerTask('build', ['concat', 'browserify', 'uglify', 'docs']);
+  grunt.registerTask('build', ['concat', 'browserify', 'uglify']);
 
-  grunt.registerTask('dev', ['clean', 'copy', 'build', 'connect', 'watch']);
+  grunt.registerTask('dev', ['clean', 'copy', 'build', 'copy', 'docs', 'connect', 'watch']);
 
   grunt.registerTask('docs', 'Generate docs via dgeni.', function() {
     var done = this.async();
@@ -165,6 +202,21 @@ module.exports = function(grunt) {
   grunt.registerTask('browserify', function () {
     grunt.task.requires('concat');
     shell.mkdir('-p', 'build/js');
+    shell.mkdir('-p', 'dist/js');
+
     shell.exec('browserify .tmp/js/smeans.js -s Smeans', { silent: true }).output.to('build/js/smeans.js');
+
+    shell.cp('build/js/smeans.js', 'dist/js/smeans.js');
+  });
+
+  grunt.registerTask('release', function (type) {
+    grunt.task.run([
+      'clean',
+      'copy',
+      'build',
+      'docs',
+      'npm-contributors',
+      'bump:' + type || 'patch',
+    ]);
   });
 };

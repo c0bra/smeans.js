@@ -1,4 +1,4 @@
-# s-means.js
+# smeans.js
 
 S-Means clustering in JavaScript
 
@@ -7,20 +7,20 @@ S-Means clustering in JavaScript
 Install the module with: `npm install s-means.js`
 
 ```javascript
-var s_means_js = require('s-means.js');
-s_means_js.awesome(); // "awesome"
+var smeans = require('smeans.js');
+smeans.cluster(...);
 ```
 
 ### In the browser
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/c0bra/smeans.js/master/dist/s-means.js.min.js
-[max]: https://raw.github.com/c0bra/smeans.js/master/dist/s-means.js.js
+[min]: https://raw.github.com/c0bra/smeans.js/master/dist/s-means.min.js
+[max]: https://raw.github.com/c0bra/smeans.js/master/dist/s-means.js
 
 In your web page:
 
 ```html
-<script src="dist/s-means.js.min.js"></script>
+<script src="smeans/dist/js/smeans.js"></script>
 <script>
 awesome(); // "awesome"
 </script>

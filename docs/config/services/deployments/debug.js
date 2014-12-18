@@ -1,18 +1,18 @@
 "use strict";
 
-module.exports = function defaultDeployment() {
+module.exports = function debugDeployment() {
   return {
-    name: 'default',
+    name: 'debug',
     examples: {
       commonFiles: {
         scripts: [
           '//ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js',
           '//cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js',
-          'js/docs.utils.js',
-          'js/smeans.js'
+          '/js/docs.utils.js',
+          '/js/smeans.js'
         ],
         stylesheets: [
-          'js/docs.utils.css'
+          '/js/docs.utils.css'
         ]
       },
       dependencyPath: '../../../'

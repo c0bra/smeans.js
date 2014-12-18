@@ -13,6 +13,7 @@ module.exports = new Package('smeans', [
 ])
 
 .factory(require('./services/deployments/default'))
+.factory(require('./services/deployments/debug'))
 
 .processor(require('./processors/assign-areas'))
 .processor(require('./processors/index-page'))
@@ -65,7 +66,7 @@ module.exports = new Package('smeans', [
   // /* Paths */
   computePathsProcessor.pathTemplates.push({
     docTypes: ['indexPage'],
-    pathTemplate: '.',
+    getPath: function() {},
     outputPathTemplate: '${id}.html'
   });
 
@@ -100,11 +101,11 @@ module.exports = new Package('smeans', [
   // });
 })
 
-.config(function (generateIndexPagesProcessor, generateExamplesProcessor, generateProtractorTestsProcessor, defaultDeployment) {
-  generateIndexPagesProcessor.deployments = [defaultDeployment];
+.config(function (generateIndexPagesProcessor, generateExamplesProcessor, generateProtractorTestsProcessor, defaultDeployment, debugDeployment) {
+  generateIndexPagesProcessor.deployments = [defaultDeployment, debugDeployment];
 
-  generateExamplesProcessor.deployments = generateIndexPagesProcessor.deployments;
-  generateProtractorTestsProcessor.deployments = generateIndexPagesProcessor.deployments;
+  generateExamplesProcessor.deployments = [defaultDeployment];
+  generateProtractorTestsProcessor.deployments = [defaultDeployment];
 });
 
 // .config(function (log, readFilesProcessor, templateFinder, writeFilesProcessor, generateExamplesProcessor, generateProtractorTestsProcessor) {

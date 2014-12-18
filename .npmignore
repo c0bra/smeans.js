@@ -1,1 +1,10 @@
-smeans.coffee
+**/.*
+bower_components
+build
+docs
+node_modules
+src
+test
+bower.json
+TODO.md
+Gruntfile.js
