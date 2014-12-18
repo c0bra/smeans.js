@@ -216,7 +216,9 @@ module.exports = function(grunt) {
       'build',
       'docs',
       'npm-contributors',
-      'bump:' + type || 'patch',
+      'bump:' + (type || 'patch'),
+      'npm-publish',
+      'gh-pages'
     ]);
   });
 };

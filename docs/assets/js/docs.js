@@ -3,6 +3,7 @@ angular.module('docsApp', ['ngRoute', 'navData', 'pagesData', 'docs.bootstrap'])
 
 .config(function ($routeProvider) {
   $routeProvider
+    .when('/', { redirectTo: '/doc/Tutorial' })
     .when('/doc/:path*', {
       controller: 'DocsController',
       templateUrl: function(urlattr) {

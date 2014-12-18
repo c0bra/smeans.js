@@ -55,7 +55,7 @@ smeans.js provides a simple way to cluster data using the S-Means algorithm.
               .attr("cy", function(d) { return d[1]; });
 
             // Cluster points and add centroids and lines
-            var clusters = Smeans.cluster(points);
+            var clusters = $scope.clusters = Smeans.cluster(points);
 
             svg.selectAll('.centroid').remove();
             svg.selectAll('.line').remove();

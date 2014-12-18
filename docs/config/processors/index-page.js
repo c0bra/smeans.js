@@ -34,16 +34,8 @@ module.exports = function generateIndexPagesProcessor(log) {
 
         indexDoc.id = 'index' + (deployment.name === 'default' ? '' : '-' + deployment.name);
 
-        log.warn(deployment);
-
         docs.push(indexDoc);
       });
-
-      // docs.push({
-      //   docType: 'indexPage',
-      //   areas: areas,
-      //   id: 'index'
-      // });
     }
   };
 };
