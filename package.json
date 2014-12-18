@@ -21,7 +21,7 @@
       "url": "https://github.com/c0bra/smeans.js/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "dist/smeans.js",
+  "main": "dist/js/smeans.js",
   "engines": {
     "node": ">= 0.6.0"
   },
