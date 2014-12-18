@@ -1,7 +1,7 @@
 {
   "name": "smeans.js",
-  "main": "dist/smeans.js",
-  "version": "0.0.0",
+  "main": "dist/js/smeans.js",
+  "version": "0.1.0",
   "homepage": "https://github.com/c0bra/smeans.js",
   "authors": [
     "Brian Hann <brian.hann@gmail.com>"
@@ -21,10 +21,14 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "node_modules",
     "bower_components",
+    "build",
+    "docs",
+    "node_modules",
+    "src",
     "test",
-    "tests"
+    "Gruntfile.js",
+    "TODO.md",
   ],
   "devDependencies": {
     "google-code-prettify": "~1.0.3",
