@@ -1,7 +1,7 @@
 {
   "name": "smeans.js",
   "main": "dist/js/smeans.js",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "homepage": "https://github.com/c0bra/smeans.js",
   "authors": [
     "Brian Hann <brian.hann@gmail.com>"

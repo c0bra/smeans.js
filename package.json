@@ -1,7 +1,7 @@
 {
   "name": "smeans",
   "description": "S-Means clustering in JavaScript",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "homepage": "https://github.com/c0bra/smeans.js",
   "author": {
     "name": "Brian Hann",
