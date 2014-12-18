@@ -22,7 +22,7 @@ module.exports = new Package('smeans', [
   dgeni.stopOnValidationError = true;
   dgeni.stopOnProcessingError = true;
 
-  log.level = 'silly';
+  log.level = 'info';
 
   readFilesProcessor.basePath = path.resolve(__dirname,'../..');
   readFilesProcessor.sourceFiles = [

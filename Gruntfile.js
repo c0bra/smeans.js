@@ -1,5 +1,6 @@
 'use strict';
 
+var shell = require('shelljs');
 var Dgeni = require('dgeni');
 
 module.exports = function(grunt) {
@@ -9,7 +10,7 @@ module.exports = function(grunt) {
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
 
-    clean: ['dist', 'build'],
+    clean: ['.tmp', 'build'],
 
     copy: {
       bower: {
@@ -44,7 +45,7 @@ module.exports = function(grunt) {
       },
       build: {
         src: ['src/<%= pkg.name %>.js'],
-        dest: 'build/js/<%= pkg.name %>.js'
+        dest: '.tmp/js/<%= pkg.name %>.js'
       },
     },
 
@@ -53,7 +54,7 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       build: {
-        src: '<%= concat.build.dest %>',
+        src: 'build/js/<%= pkg.name %>.js',
         dest: 'build/js/<%= pkg.name %>.min.js'
       }
     },
@@ -146,10 +147,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'jscs', 'test', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'jscs', 'test', 'build']);
 
   grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest']);
-  grunt.registerTask('build', ['concat', 'uglify', 'docs']);
+  // grunt.registerTask('build', ['concat', 'uglify', 'docs']);
+  grunt.registerTask('build', ['concat', 'browserify', 'uglify', 'docs']);
 
   grunt.registerTask('dev', ['clean', 'copy', 'build', 'connect', 'watch']);
 
@@ -158,5 +160,11 @@ module.exports = function(grunt) {
     var dgeni = new Dgeni([require('./docs/config')]);
     
     dgeni.generate().then(done);
+  });
+
+  grunt.registerTask('browserify', function () {
+    grunt.task.requires('concat');
+    shell.mkdir('-p', 'build/js');
+    shell.exec('browserify .tmp/js/smeans.js -s Smeans', { silent: true }).output.to('build/js/smeans.js');
   });
 };

@@ -9,9 +9,14 @@ What up yo
 <example name="tutorial1" module="app">
   <file name="index.html">
     <div>Scooby doo</div>
+    <br>
+    {{ vals | json }}
   </file>
   <file name="app.js">
     angular.module('app', [])
-    .value('foo', 'bar');
+    
+    .run(function ($rootScope) {
+      $rootScope.vals = Smeans.cluster([ [1, 0], [2, 2], [1000, 10001] ]);
+    })
   </file>
 </example>
