@@ -5,7 +5,10 @@ module.exports = function defaultDeployment() {
     name: 'default',
     examples: {
       commonFiles: {
-        scripts: [ '../../../smeans.js' ]
+        scripts: [
+          '//ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js',
+          '/js/smeans.js'
+        ]
       },
       dependencyPath: '../../../'
     },

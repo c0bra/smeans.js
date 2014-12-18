@@ -22,12 +22,12 @@ module.exports = new Package('smeans', [
   dgeni.stopOnValidationError = true;
   dgeni.stopOnProcessingError = true;
 
-  log.level = 'debug';
+  log.level = 'silly';
 
   readFilesProcessor.basePath = path.resolve(__dirname,'../..');
   readFilesProcessor.sourceFiles = [
     { include: 'src/**/*.js', basePath: 'src' },
-    { include: 'docs/content/**/*.md', basePath: 'docs/content', fileReader: 'ngdocFileReader' }
+    { include: 'docs/content/**/*.ngdoc', basePath: 'docs/content', fileReader: 'ngdocFileReader' }
   ];
 
   writeFilesProcessor.outputFolder = 'build';
@@ -36,15 +36,15 @@ module.exports = new Package('smeans', [
 .config(function (templateFinder, templateEngine) {
   templateFinder.templateFolders.unshift(path.resolve(__dirname, 'templates'));
 
-  templateFinder.templatePatterns = [
-    '${ doc.docType }.template.html',
-    'common.template.html'
-  ];
+  // templateFinder.templatePatterns = [
+  //   '${ doc.docType }.template.html',
+  //   'common.template.html'
+  // ];
 
-  templateEngine.config.tags = {
-    variableStart: '{$',
-    variableEnd: '$}'
-  };
+  // templateEngine.config.tags = {
+  //   variableStart: '{$',
+  //   variableEnd: '$}'
+  // };
 })
 
 .config(function (computePathsProcessor, computeIdsProcessor) {
@@ -56,12 +56,13 @@ module.exports = new Package('smeans', [
   });
 
   computeIdsProcessor.idTemplates.push({
-    docTypes: ['content'],
+    docTypes: ['content', 'overview', 'tutorial'],
     idTemplate: 'content-${fileInfo.relativePath.replace("/","-")}',
+    // getId: function(doc) { return doc.fileInfo.baseName; },
     getAliases: function(doc) { return [doc.id]; }
   });
 
-  /* Paths */
+  // /* Paths */
   computePathsProcessor.pathTemplates.push({
     docTypes: ['indexPage'],
     pathTemplate: '.',
@@ -76,7 +77,7 @@ module.exports = new Package('smeans', [
   });
 
   computePathsProcessor.pathTemplates.push({
-    docTypes: ['content'],
+    docTypes: ['content', 'overview', 'tutorial'],
     getPath: function(doc) {
       var docPath = path.dirname(doc.fileInfo.relativePath);
       if ( doc.fileInfo.baseName !== 'index' ) {
@@ -91,6 +92,12 @@ module.exports = new Package('smeans', [
         doc.fileInfo.baseName) + '.html';
     }
   });
+
+  // computePathsProcessor.pathTemplates.push({
+  //   docTypes: ['runnableExample' ],
+  //   pathTemplate: 'examples/${example.id}',
+  //   outputPathTemplate: 'partials/examples/${example.id}'
+  // });
 })
 
 .config(function (generateIndexPagesProcessor, generateExamplesProcessor, generateProtractorTestsProcessor, defaultDeployment) {

@@ -1,0 +1,17 @@
+@ngdoc content
+@name Tutorial: Start
+@description
+
+# Here we are! #
+
+What up yo
+
+<example name="tutorial1" module="app">
+  <file name="index.html">
+    <div>Scooby doo</div>
+  </file>
+  <file name="app.js">
+    angular.module('app', [])
+    .value('foo', 'bar');
+  </file>
+</example>

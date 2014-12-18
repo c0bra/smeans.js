@@ -1,5 +1,5 @@
 {
-  "name": "smeans.js",
+  "name": "smeans",
   "description": "S-Means clustering in JavaScript",
   "version": "0.0.0",
   "homepage": "https://github.com/c0bra/smeans.js",
@@ -33,7 +33,6 @@
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
     "grunt-contrib-watch": "^0.6.1",
     "mocha": "^2.0.1",
     "grunt-mocha-test": "^0.12.4",

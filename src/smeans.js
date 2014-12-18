@@ -34,6 +34,15 @@
         ]);
       </pre>
       ... and groups them into "clusters" according to Euclidean-distance similarity.
+
+      <example>
+        <file name="index.html">
+          <h1>Works?</h1>
+        </file>
+        <file name="app.js">
+          angular.module('app', []);
+        </file>
+      </example>
   */
   function cluster(elements, opts) {
     /*jshint -W004 */
