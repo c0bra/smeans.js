@@ -6,7 +6,7 @@ angular.module('docsApp', ['ngRoute', 'navData', 'pagesData', 'docs.bootstrap'])
     .when('/doc/:path*', {
       controller: 'DocsController',
       templateUrl: function(urlattr) {
-        return '/partials/' + urlattr.path + '.html';
+        return 'partials/' + urlattr.path + '.html';
       },
       resolve: {
         $route: function ($route) {
