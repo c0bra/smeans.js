@@ -28,7 +28,7 @@
     "src",
     "test",
     "Gruntfile.js",
-    "TODO.md",
+    "TODO.md"
   ],
   "devDependencies": {
     "google-code-prettify": "~1.0.3",
