@@ -1,0 +1,78 @@
+(function(angular) {
+  'use strict';
+angular.module('app', ['docs.utils'])
+
+.run(function ($rootScope) {
+  $rootScope.vals = Smeans.cluster([ [1, 0], [2, 2], [1000, 10001] ]);
+})
+
+.directive('appCanvas', function ($log, $interval, $compile) {
+  var r = 4;
+
+  return {
+    restrict: 'EA',
+    priority: '200',
+    scope: false,
+    require: 'appCanvas',
+    link: function ($scope, $elm, $attr, ctrl) {
+      var svg = ctrl.svg();
+      var points = $scope.points = [];
+
+      svg.selectAll('circle')
+        .data(points);
+
+      svg.on('click', function () {
+        points.push(d3.mouse(this));
+
+        redraw();
+      });
+
+      function redraw() {
+        var circle = svg.selectAll("circle")
+          .data(points, function(d) { return d; });
+
+        circle.enter()
+          .append('circle')
+          .attr('r', r)
+          .attr("cx", function(d) { return d[0]; })
+          .attr("cy", function(d) { return d[1]; });
+
+        // Cluster points and add centroids and lines
+        var clusters = Smeans.cluster(points);
+
+        svg.selectAll('.centroid').remove();
+        svg.selectAll('.line').remove();
+
+        for (var ci in clusters) {
+          var cluster = clusters[ci];
+
+          svg.append('circle')
+            .attr('class', 'centroid')
+            .attr('r', r)
+            .attr('cx', cluster.centroid[0])
+            .attr('cy', cluster.centroid[1]);
+
+          for (var ei in cluster.elements) {
+            var e = cluster.elements[ei];
+
+            var line = svg.append('line')
+              .style('stroke', 'gray')  // colour the line
+              .attr('class', 'line')
+              .attr("x1", e[0])     // x position of the first end of the line
+              .attr("y1", e[1])     // y position of the first end of the line
+              .attr("x2", cluster.centroid[0])  // x position of the second end of the line
+              .attr("y2", cluster.centroid[1]); // y position of the second end of the line
+          }
+        }
+      }
+
+      $scope.redraw = redraw;
+      $scope.clear = function() {
+        $scope.points.length = 0;
+        svg.selectAll("circle").remove();
+        svg.selectAll("line").remove();
+      };
+    }
+  };
+});
+})(window.angular);
